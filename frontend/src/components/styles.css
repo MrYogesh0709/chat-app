@@ -1,0 +1,33 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.typing-indicator {
+  position: absolute;
+  right: 10px; /* Adjust as needed to position the indicator */
+  top: 50%; /* Adjust as needed to vertically center the indicator */
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #0073e6; /* Your desired color */
+  animation: typingAnimation 1s infinite;
+}
+
+@keyframes typingAnimation {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
