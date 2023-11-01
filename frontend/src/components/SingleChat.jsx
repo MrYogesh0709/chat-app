@@ -13,7 +13,7 @@ import "./styles.css";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/chatProvider";
-const ENDPOINT = "http://localhost:3000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = "https://chatapp-nxt1.onrender.com"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
 
 var socket, selectedChatCompare;
 
