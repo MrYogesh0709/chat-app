@@ -7,13 +7,20 @@ const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const { Server } = require("socket.io");
+const path = require("path");
 dotenv.config();
 const app = express();
+
+app.use(express.static(path.resolve(__dirname, "./frontend/dist")));
 
 app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
+
+app.use("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./frontend/dist", "index.html"));
+});
 
 const port = process.env.PORT || 3000;
 

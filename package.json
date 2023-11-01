@@ -4,9 +4,12 @@
   "description": "chat-app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node --watch index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup-production": "npm run install-client && npm run build-client && npm install",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "server": "nodemon index --ignore client",
+    "client": "npm run dev --prefix client",
+    "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -21,5 +24,8 @@
   },
   "server": {
     "node": ">=18.13.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
