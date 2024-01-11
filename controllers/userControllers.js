@@ -59,20 +59,18 @@ const authUser = async (req, res) => {
     throw new Error("Please enter all the fields");
   }
   const user = await User.findOne({ email });
-  const matchPassword = await user.matchPassword(password);
-  if (user && matchPassword) {
-    res.status(200).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      pic: user.pic,
-      token: generateToken(user._id),
-    });
-  } else {
+  if (!user || !(await user.matchPassword(password))) {
     res.status(401);
-    throw new Error("Invalid mail or password");
+    throw new Error("Invalid Email or Password");
   }
+  res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+    pic: user.pic,
+    token: generateToken(user._id),
+  });
 };
 
 module.exports = { allUsers, registerUser, authUser };

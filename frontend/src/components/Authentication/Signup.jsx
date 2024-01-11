@@ -59,7 +59,6 @@ const Signup = () => {
         },
         config
       );
-      console.log(data);
       toast({
         title: "Registration Successful",
         status: "success",
@@ -95,7 +94,6 @@ const Signup = () => {
       });
       return;
     }
-    console.log(pics);
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
@@ -111,7 +109,7 @@ const Signup = () => {
           setPicLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           setPicLoading(false);
         });
     } else {
