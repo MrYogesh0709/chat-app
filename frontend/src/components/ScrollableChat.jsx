@@ -8,10 +8,11 @@ import {
   isSameUser,
 } from "../config/ChatLogics";
 import { useEffect, useRef } from "react";
+import { ChatState } from "../Context/chatProvider";
 
 const ScrollableChat = ({ messages }) => {
-  const user = JSON.parse(localStorage.getItem("userInfo"));
   const chatContainerRef = useRef(null);
+  const { user } = ChatState();
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {

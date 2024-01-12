@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { ChatState } from "../../Context/chatProvider";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -15,6 +16,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const { setUser } = ChatState();
 
   const submitHandler = async () => {
     setLoading(true);
@@ -51,6 +54,7 @@ const Login = () => {
         position: "bottom",
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
+      setUser(data);
       setLoading(false);
       navigate("/chats");
     } catch (error) {
@@ -65,7 +69,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-
   return (
     <VStack spacing="10px">
       <FormControl id="email" isRequired>

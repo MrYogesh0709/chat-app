@@ -29,9 +29,8 @@ const GroupChatModal = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
-  const { chats, setChats } = ChatState();
+  const { chats, setChats, user } = ChatState();
 
-  const user = JSON.parse(localStorage.getItem("userInfo"));
   const handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
       toast({

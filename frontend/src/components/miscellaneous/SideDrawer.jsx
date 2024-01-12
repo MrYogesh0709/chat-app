@@ -38,14 +38,22 @@ function SideDrawer() {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const { setSelectedChat, notification, setNotification, chats, setChats } =
-    ChatState();
+  const {
+    setSelectedChat,
+    notification,
+    setNotification,
+    chats,
+    setChats,
+    user,
+    logoutHandler,
+  } = ChatState();
 
-  const user = JSON.parse(localStorage.getItem("userInfo"));
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const logoutHandler = () => {
-    localStorage.removeItem("userInfo");
+  if (!user) {
+    navigate("/");
+  }
+  const logoutUser = () => {
+    logoutHandler();
     navigate("/");
   };
 
@@ -196,7 +204,7 @@ function SideDrawer() {
                 <MenuItem>My Profile</MenuItem>
               </ProfileModal>
               <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              <MenuItem onClick={logoutUser}>Logout</MenuItem>
             </MenuList>
           </Menu>
         </div>

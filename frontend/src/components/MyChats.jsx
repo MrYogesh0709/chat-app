@@ -8,19 +8,21 @@ import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { Button } from "@chakra-ui/react";
 import { ChatState } from "../Context/chatProvider";
+import { useNavigate } from "react-router-dom";
 
 const MyChats = ({ fetchAgain }) => {
-  const loggedUser = JSON.parse(localStorage.getItem("userInfo"));
-
-  const { selectedChat, setSelectedChat, chats, setChats } = ChatState();
+  const navigate = useNavigate();
+  const { selectedChat, setSelectedChat, chats, setChats, user } = ChatState();
 
   const toast = useToast();
-
+  if (!user) {
+    navigate("/");
+  }
   const fetchChats = async () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${loggedUser.token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       };
 
@@ -99,7 +101,7 @@ const MyChats = ({ fetchAgain }) => {
               >
                 <Text>
                   {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
+                    ? getSender(user, chat.users)
                     : chat.chatName}
                 </Text>
                 {chat.latestMessage && (

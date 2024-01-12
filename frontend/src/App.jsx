@@ -7,12 +7,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-    // loader: rootLoader,
   },
   {
     path: "chats",
     element: <ChatPage />,
-    // loader: teamLoader,
   },
 ]);
 

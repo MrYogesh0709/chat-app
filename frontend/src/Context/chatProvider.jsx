@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ChatContext = createContext();
 
@@ -6,6 +6,16 @@ const ChatProvider = ({ children }) => {
   const [selectedChat, setSelectedChat] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userInfo")));
+  }, []);
+
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    setUser(null);
+  };
 
   return (
     <ChatContext.Provider
@@ -16,6 +26,9 @@ const ChatProvider = ({ children }) => {
         setNotification,
         chats,
         setChats,
+        user,
+        setUser,
+        logoutHandler,
       }}
     >
       {children}

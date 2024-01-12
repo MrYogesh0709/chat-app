@@ -11,9 +11,10 @@ import {
 import Login from "../../src/components/Authentication/Login";
 import Signup from "../../src/components/Authentication/Signup";
 import { Navigate } from "react-router-dom";
+import { ChatState } from "../Context/chatProvider";
 
 function Homepage() {
-  const user = JSON.parse(localStorage.getItem("userInfo"));
+  const { user } = ChatState();
 
   if (user) {
     return <Navigate to="/chats" />;
